@@ -6,26 +6,47 @@
     <title>vue test</title>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script src="app.js" defer></script>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     
     <div id="app">
 
-        <div class="flex justify-center items-center h-screen">
-            <article class="w-1/2 border border-1 border-black bg-stone-800 px-10 py-5 rounded-lg flex items-center justify-between gap-5">
-                <img :src="trackImage" alt="track image" class="w-[150px] h-[150px] rounded-full border border-[5px] border-white">
-                <p class="text-white text-2xl">{{ fullName }}</p>
+        <div class="container">
+        <!-- <input 
+        v-model.lazy="blockWidth"
+        type="text" class="border-1 border border-black w-1/2 p-4" placeholder="Введите длину блока"> -->
+
+            <article class="track">
+                <img :src="trackImage" alt="track image" class="track__image">
+                <p class="track__info">{{ fullName }}</p>
                 <svg 
-                @click="like" 
-                class="text-white fill-current h-7 w-7 cursor-pointer" 
+                @click="addLike" 
+                class="track__like" 
+                :class="{ track__like_actived : isLike }"
                 viewBox="0 0 20 19" 
                 xmlns="http://www.w3.org/2000/svg">
                     <path 
                      d="M10 18.35L8.55 17.03C3.4 12.36 0 9.27 0 5.5C0 2.41 2.42 0 5.5 0C7.24 0 8.91 0.81 10 2.08C11.09 0.81 12.76 0 14.5 0C17.58 0 20 2.41 20 5.5C20 9.27 16.6 12.36 11.45 17.03L10 18.35Z"/>
                 </svg>
             </article>  
+
+            <div class="msg">
+                <p v-if="isLike">Вы лайкнули фото</p>
+                <p v-else>Вы не лайкнули фото</p>
+                <p v-show="isLike">Показывается, не удаляется со страницы</p>
+            </div>
+            <div class="msg">
+                <p>похожие треки</p>
+                <ul class="list">
+                    <li v-for="(track, index) in similarTracks">
+                        {{ index + 1 }}. {{ track.name }} - {{ track.duration }} 
+                    </li>
+                </ul>
+            </div>
         </div>
         
     </div>
