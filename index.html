@@ -34,7 +34,7 @@
                 </svg>
             </article>  
 
-            <div class="msg">
+            <!-- <div class="msg">
                 <p v-if="isLike">Вы лайкнули фото</p>
                 <p v-else>Вы не лайкнули фото</p>
                 <p v-show="isLike">Показывается, не удаляется со страницы</p>
@@ -46,7 +46,20 @@
                         {{ index + 1 }}. {{ track.name }} - {{ track.duration }} 
                     </li>
                 </ul>
-            </div>
+            </div> -->
+
+            <label>box width {{ boxW }}</label>
+            <input type="range" v-model="boxW" min="50" max="200">
+            <button @click.prevent="copyWidth">Copy W</button>
+            <label>box height {{ boxH }}</label>
+            <input type="range" v-model="boxH" min="50" max="200">
+            <button @click.prevent="copyHeight">Copy H</button>
+            <button @click.prevent="copyAll">Copy All</button>
+
+            <div 
+            style="background-color: red;"
+            :style="sizeBox"
+            ></div>
         </div>
         
     </div>

@@ -21,16 +21,39 @@ const vm = Vue.createApp({
           duration: "3.22",
         },
       ],
+      boxW: 100,
+      boxH: 100,
     };
   },
   methods: {
     addLike() {
       !this.isLike ? (this.isLike = true) : (this.isLike = false);
     },
+    copyWidth() {
+      let text = `width: ${this.boxW}px;`;
+      navigator.clipboard.writeText(text);
+      alert(`copied text: ${text}`);
+    },
+    copyHeight() {
+      let text = `height: ${this.boxH}px;`;
+      navigator.clipboard.writeText(text);
+      alert(`copied text: ${text}`);
+    },
+    copyAll() {
+      let text = `width: ${this.boxW}px; height: ${this.boxH}px;`;
+      navigator.clipboard.writeText(text);
+      alert(`copied text: ${text}`);
+    }
   },
   computed: {
     fullName() {
       return `${this.author} - ${this.track}`;
+    },
+    sizeBox() {
+      return {
+        width: `${this.boxW}px`,
+        height: `${this.boxH}px`,
+      };
     },
   },
   watch: {
